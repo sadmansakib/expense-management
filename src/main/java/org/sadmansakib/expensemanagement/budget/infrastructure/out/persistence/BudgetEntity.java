@@ -1,14 +1,16 @@
 package org.sadmansakib.expensemanagement.budget.infrastructure.out.persistence;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Index;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.proxy.HibernateProxy;
 import org.hibernate.type.SqlTypes;
 import org.jmolecules.ddd.annotation.Entity;
-import org.jmolecules.ddd.annotation.Identity;
 import org.sadmansakib.expensemanagement.budget.domain.Budget;
+import org.sadmansakib.expensemanagement.shared.persistence.domain.BaseEntity;
 
 import java.util.Objects;
 import java.util.function.UnaryOperator;
@@ -20,15 +22,7 @@ import java.util.function.UnaryOperator;
 })
 @Entity
 @jakarta.persistence.Entity
-public class BudgetEntity{
-
-    @Id
-    @Identity
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "budgets_gen")
-    @SequenceGenerator(name = "budgets_gen", sequenceName = "budgets_seq")
-    @Column(name = "id", nullable = false)
-    @JdbcTypeCode(SqlTypes.BIGINT)
-    private Long id;
+public class BudgetEntity extends BaseEntity {
 
     @Column(name = "allocated_amount", nullable = false)
     @JdbcTypeCode(SqlTypes.DOUBLE)

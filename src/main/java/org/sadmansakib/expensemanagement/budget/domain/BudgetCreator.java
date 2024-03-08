@@ -3,6 +3,7 @@ package org.sadmansakib.expensemanagement.budget.domain;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.jmolecules.architecture.hexagonal.SecondaryPort;
+import org.sadmansakib.expensemanagement.shared.entity.domain.Amount;
 
 @RequiredArgsConstructor
 @Slf4j
@@ -23,11 +24,11 @@ public class BudgetCreator {
         return budgets.save(budget);
     }
 
-    public record BudgetToCreate(Budget.Amount totalAllocatedAmount, Budget.Month month, Budget.Year year) {
+    public record BudgetToCreate(Amount totalAllocatedAmount, Budget.Month month, Budget.Year year) {
         public Budget create() {
             return Budget.builder()
                     .allocated(totalAllocatedAmount)
-                    .spent(Budget.Amount.zero())
+                    .spent(Amount.zero())
                     .month(month)
                     .year(year)
                     .build();

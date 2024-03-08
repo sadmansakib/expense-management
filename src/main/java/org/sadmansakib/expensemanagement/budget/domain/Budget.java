@@ -5,19 +5,21 @@ import lombok.*;
 import org.jmolecules.ddd.types.AggregateRoot;
 import org.jmolecules.ddd.types.Identifier;
 import org.jmolecules.ddd.types.ValueObject;
+import org.sadmansakib.expensemanagement.shared.entity.domain.Amount;
+import org.sadmansakib.expensemanagement.shared.entity.domain.Id;
 
 @Builder
-public record Budget(BudgetId id, Amount allocated, Amount spent, Month month,
-                     Year year) implements AggregateRoot<Budget, Budget.BudgetId> {
+public record Budget(Id id, Amount allocated, Amount spent, Month month,
+                     Year year) implements AggregateRoot<Budget, Id> {
     @Override
-    public BudgetId getId() {
+    public Id getId() {
         return id;
     }
 
     public static Budget toBudget(Long id, Double totalAllocatedAmount,
                                   Double totalSpentAmount, String month, Integer year) {
         return Budget.builder()
-                .id(new BudgetId(id))
+                .id(new Id(id))
                 .allocated(new Amount(totalAllocatedAmount))
                 .spent(new Amount(totalSpentAmount))
                 .month(new Month(month))
@@ -41,23 +43,6 @@ public record Budget(BudgetId id, Amount allocated, Amount spent, Month month,
         }
     }
 
-    public record Amount(Double amount) implements ValueObject {
-        public Double get() {
-            return amount;
-        }
-
-        public static Amount zero() {
-            return new Amount(0.0);
-        }
-
-        public Amount add(Amount amount) {
-            return new Amount(this.amount + amount.amount);
-        }
-
-        public Amount subtract(Amount amount) {
-            return new Amount(this.amount - amount.amount);
-        }
-    }
 
     public record Month(String month) implements ValueObject {
         public String get() {

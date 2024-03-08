@@ -1,0 +1,32 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1709917397644-2
+      author: sadmansakib
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addColumn:
+            columns:
+              - column:
+                  name: created_date
+                  type: DATETIME
+              - column:
+                  name: last_modified_date
+                  type: DATETIME
+            tableName: budgets
+  - changeSet:
+      id: 1709917397644-4
+      author: sadmansakib
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - dropSequence:
+            sequenceName: budgets_seq
+  - changeSet:
+      id: 1709917397644-1
+      author: sadmansakib
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addAutoIncrement:
+            columnDataType: bigint
+            columnName: id
+            tableName: budgets
+
