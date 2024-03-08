@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.jmolecules.architecture.hexagonal.SecondaryAdapter;
 import org.sadmansakib.expensemanagement.budget.domain.Budget;
 import org.sadmansakib.expensemanagement.budget.domain.BudgetRepository;
+import org.sadmansakib.expensemanagement.shared.entity.domain.Id;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,5 +30,11 @@ public class BudgetRepositoryAdapter implements BudgetRepository {
     @Override
     public Optional<Budget> findByMonthAndYear(Budget.Month month, Budget.Year year) {
         return Optional.empty();
+    }
+
+    @Override
+    public Optional<Budget> findById(Id id) {
+        return budgets.findById(id.get())
+                .map(BudgetEntity::toDomain);
     }
 }

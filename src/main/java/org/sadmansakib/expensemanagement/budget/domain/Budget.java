@@ -37,13 +37,6 @@ public record Budget(Id id, Amount allocated, Amount spent, Month month,
                 .build();
     }
 
-    public record BudgetId(Long id) implements Identifier {
-        public Long get() {
-            return id;
-        }
-    }
-
-
     public record Month(String month) implements ValueObject {
         public String get() {
             return month;

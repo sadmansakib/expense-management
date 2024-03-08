@@ -1,0 +1,50 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1709922384894-1
+      author: sadmansakib
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_categories
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: created_date
+                  type: DATETIME
+              - column:
+                  name: last_modified_date
+                  type: DATETIME
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+              - column:
+                  name: description
+                  type: VARCHAR(255)
+              - column:
+                  name: total_allocated_amount
+                  type: DOUBLE
+              - column:
+                  name: total_spent_amount
+                  type: DOUBLE
+              - column:
+                  name: budget_id
+                  type: BIGINT
+            tableName: categories
+  - changeSet:
+      id: 1709922384894-2
+      author: sadmansakib
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createIndex:
+            columns:
+              - column:
+                  name: budget_id
+            indexName: idx_categories_budget_id
+            tableName: categories
+

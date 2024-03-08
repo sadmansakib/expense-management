@@ -8,4 +8,5 @@ import java.util.Optional;
 public interface BudgetRepository extends Repository<Budget, Id> {
     Budget save(Budget budget);
     Optional<Budget> findByMonthAndYear(Budget.Month month, Budget.Year year);
+    Optional<Budget> findById(Id id);
 }
