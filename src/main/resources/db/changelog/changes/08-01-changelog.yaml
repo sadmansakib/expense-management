@@ -1,0 +1,55 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1709913786831-1
+      author: sadmansakib
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createSequence:
+            incrementBy: 50
+            sequenceName: budgets_seq
+            startValue: 1
+  - changeSet:
+      id: 1709913786831-2
+      author: sadmansakib
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_budgets
+                  name: id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: allocated_amount
+                  type: DOUBLE
+              - column:
+                  name: total_spent_amount
+                  type: DOUBLE
+              - column:
+                  constraints:
+                    nullable: false
+                  name: month
+                  type: VARCHAR(10)
+              - column:
+                  name: year
+                  type: INT
+            tableName: budgets
+  - changeSet:
+      id: 1709913786831-3
+      author: sadmansakib
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createIndex:
+            columns:
+              - column:
+                  name: month
+              - column:
+                  name: year
+            indexName: idx_budgets_month_year
+            tableName: budgets
+

@@ -1,0 +1,22 @@
+spring:
+  devtools:
+    restart:
+      enabled: true
+    livereload:
+      enabled: true
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:postgresql://localhost:5432/expense_management
+    username: postgres
+    password: postgres
+
+logging:
+  level:
+    org:
+      sadmansakib:
+        expensemanagement: INFO
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, modulith

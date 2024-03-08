@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration>
+<configuration scan="true">
+    <springProperty name="log.level" source="logging.level.root" defaultValue="INFO" />
+    <include resource="org/springframework/boot/logging/logback/defaults.xml" />
+    <include resource="org/springframework/boot/logging/logback/console-appender.xml" />
+
+    <property name="LOG_PATTERN"
+              value="%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${level:-%5p}) %clr(${PID:- }){magenta} %clr([%5.5t]){faint} %clr(%-25.25logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
+
+    <conversionRule conversionWord="coloredLevel" converterClass="org.sadmansakib.expensemanagement.shared.logging.domain.LogColorConversion" />
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="ch.qos.logback.classic.PatternLayout">
+                <pattern>%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint}|%clr(TraceId: %X{traceId}){cyan}|%coloredLevel|%clr(${PID:- }){magenta} %clr([%t]){faint} %clr(%-25.25logger{39}){cyan} %clr(:){faint} %M - %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}</pattern>
+            </layout>
+        </encoder>
+    </appender>
+
+    <logger name="org.sadmansakib.expensemanagement" level="INFO" />
+
+    <logger name="ch.qos.logback" level="WARN" />
+    <logger name="com.sun" level="WARN" />
+    <logger name="org.springframework" level="WARN" />
+    <logger name="org.springframework.web" level="ERROR" />
+    <logger name="org.hibernate.validator" level="WARN" />
+    <logger name="org.hibernate.orm" level="WARN" />
+    <logger name="org.hibernate.ejb.HibernatePersistence" level="OFF" />
+    <logger name="org.postgresql" level="WARN" />
+    <logger name="liquibase" level="WARN" />
+    <logger name="LiquibaseSchemaResolver" level="INFO" />
+    <logger name="com.zaxxer.hikari" level="WARN" />
+
+    <root level="${log.level}">
+        <appender-ref ref="CONSOLE" />
+    </root>
+
+    <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
+        <resetJUL>true</resetJUL>
+    </contextListener>
+</configuration>

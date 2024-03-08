@@ -25,19 +25,24 @@ ext {
     set('springModulithVersion', "1.1.2")
 }
 
+apply {
+    from 'gradle/cache.gradle'
+}
+
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
-    implementation 'org.springframework.boot:spring-boot-starter-cache'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.liquibase:liquibase-core'
     implementation 'org.springframework.modulith:spring-modulith-starter-core'
     implementation 'org.springframework.modulith:spring-modulith-starter-jpa'
+    implementation 'org.springframework.boot:spring-boot-configuration-processor'
     compileOnly 'org.projectlombok:lombok'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
     runtimeOnly 'org.postgresql:postgresql'
     runtimeOnly 'org.springframework.modulith:spring-modulith-actuator'
-    runtimeOnly 'org.springframework.modulith:spring-modulith-observability'
+//    runtimeOnly 'org.springframework.modulith:spring-modulith-observability'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.modulith:spring-modulith-starter-test'
