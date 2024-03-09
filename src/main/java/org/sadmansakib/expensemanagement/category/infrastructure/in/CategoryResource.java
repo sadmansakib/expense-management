@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/categories")
@@ -29,9 +30,17 @@ public class CategoryResource {
     }
 
     @GetMapping
-    ResponseEntity<RestResponse<RestCategories>> findAll() {
-        log.info("CategoryResource| fetching all categories");
-        var allCategories = categories.findAll();
-        return ResponseEntity.ok(RestResponse.ok(RestCategories.from(allCategories)));
+    ResponseEntity<RestResponse<RestCategories>> findAll(
+            @RequestParam Optional<Long> budgetId
+    ) {
+        var response = budgetId.map(id -> {
+                    log.info("CategoryResource|findAll:: budgetId: {}", id);
+                    return categories.findAllByBudgetId(id);
+                })
+                .orElseGet(() -> {
+                    log.info("CategoryResource|findAll:: no budgetId");
+                    return categories.findAll();
+                });
+        return ResponseEntity.ok(RestResponse.ok(RestCategories.from(response)));
     }
 }

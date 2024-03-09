@@ -31,4 +31,8 @@ public class CategoryManagement {
     public Categories findAll() {
         return new Categories(categories.findAll());
     }
+
+    public Categories findAllByBudgetId(Long budgetId) {
+        return new Categories(categories.findAllByBudgetId(budgetId));
+    }
 }

@@ -34,4 +34,12 @@ public class CategoryRepositoryAdapter implements CategoryRepository {
                 .map(CategoryEntity::toDomain)
                 .toList();
     }
+
+    @Override
+    public Collection<Category> findAllByBudgetId(Long budgetId) {
+        return categories.findAllByBudgetId(budgetId)
+                .stream()
+                .map(CategoryEntity::toDomain)
+                .toList();
+    }
 }

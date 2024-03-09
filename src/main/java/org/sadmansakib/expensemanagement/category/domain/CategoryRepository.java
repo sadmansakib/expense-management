@@ -8,4 +8,5 @@ import java.util.Collection;
 public interface CategoryRepository {
     Category save(Category category);
     Collection<Category> findAll();
+    Collection<Category> findAllByBudgetId(Long budgetId);
 }
