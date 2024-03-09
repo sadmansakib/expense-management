@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.jmolecules.architecture.hexagonal.PrimaryPort;
 import org.jmolecules.ddd.annotation.Service;
 import org.sadmansakib.expensemanagement.budget.domain.BudgetService;
+import org.sadmansakib.expensemanagement.category.domain.Categories;
 import org.sadmansakib.expensemanagement.category.domain.Category;
 import org.sadmansakib.expensemanagement.category.domain.CategoryCreator;
 import org.sadmansakib.expensemanagement.category.domain.CategoryRepository;
@@ -25,5 +26,9 @@ public class CategoryManagement {
     public Category create(CategoryCreator.CategoryToCreate categoryToCreate) {
         log.info("CategoryManagement|create:: categoryToCreate: {}", categoryToCreate);
         return creator.create(categoryToCreate);
+    }
+
+    public Categories findAll() {
+        return new Categories(categories.findAll());
     }
 }

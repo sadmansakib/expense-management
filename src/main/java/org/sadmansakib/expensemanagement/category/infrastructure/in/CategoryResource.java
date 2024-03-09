@@ -27,4 +27,11 @@ public class CategoryResource {
         return ResponseEntity.created(URI.create("/api/v1/categories/" + category.id().get()))
                 .body(RestResponse.created(RestCategory.from(category), "Category created successfully"));
     }
+
+    @GetMapping
+    ResponseEntity<RestResponse<RestCategories>> findAll() {
+        log.info("CategoryResource| fetching all categories");
+        var allCategories = categories.findAll();
+        return ResponseEntity.ok(RestResponse.ok(RestCategories.from(allCategories)));
+    }
 }

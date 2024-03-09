@@ -8,6 +8,8 @@ import org.sadmansakib.expensemanagement.category.domain.CategoryRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collection;
+
 @Service
 @SecondaryAdapter
 @Transactional
@@ -23,5 +25,13 @@ public class CategoryRepositoryAdapter implements CategoryRepository {
         entity = categories.save(entity);
         log.info("CategoryRepositoryAdapter|save:: saved entity: {}", entity);
         return entity.toDomain();
+    }
+
+    @Override
+    public Collection<Category> findAll() {
+        return categories.findAll()
+                .stream()
+                .map(CategoryEntity::toDomain)
+                .toList();
     }
 }
