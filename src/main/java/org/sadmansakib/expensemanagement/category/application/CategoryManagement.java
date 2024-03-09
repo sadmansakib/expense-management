@@ -4,10 +4,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.jmolecules.architecture.hexagonal.PrimaryPort;
 import org.jmolecules.ddd.annotation.Service;
 import org.sadmansakib.expensemanagement.budget.domain.BudgetService;
-import org.sadmansakib.expensemanagement.category.domain.Categories;
-import org.sadmansakib.expensemanagement.category.domain.Category;
-import org.sadmansakib.expensemanagement.category.domain.CategoryCreator;
-import org.sadmansakib.expensemanagement.category.domain.CategoryRepository;
+import org.sadmansakib.expensemanagement.category.domain.*;
+import org.sadmansakib.expensemanagement.category.domain.ExpenseAddedInCategoryEvent;
+import org.springframework.modulith.events.ApplicationModuleListener;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 @Service
@@ -35,5 +35,21 @@ public class CategoryManagement {
     public Categories findAllByBudgetId(Long budgetId) {
         log.info("CategoryManagement|findAllByBudgetId:: fetching categories with budgetId: {}", budgetId);
         return new Categories(categories.findAllByBudgetId(budgetId));
+    }
+
+    @ApplicationModuleListener
+    @Async
+    void handleExpenseAdded(ExpenseAddedInCategoryEvent event) {
+        log.info("CategoryManagement|handleExpenseAdded:: received event: {}", event);
+        categories.findById(event.categoryId().id())
+                .ifPresentOrElse(category -> {
+                    log.info("CategoryManagement|handleExpenseAdded:: found category: {}", category);
+                    category = category.addSpent(event.spent());
+                    log.info("CategoryManagement|handleExpenseAdded:: updated category: {}", category);
+                    categories.save(category);
+                }, () -> {
+                    log.error("CategoryManagement|handleExpenseAdded:: category not found for id: {}", event.categoryId());
+                    throw new CategoryNotFoundException(event.categoryId().get());
+                });
     }
 }

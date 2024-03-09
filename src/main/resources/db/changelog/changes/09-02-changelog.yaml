@@ -1,0 +1,42 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1709976997240-1
+      author: sadmansakib
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_expenses
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: created_date
+                  type: DATETIME
+              - column:
+                  name: last_modified_date
+                  type: DATETIME
+              - column:
+                  constraints:
+                    nullable: false
+                  name: description
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: spent_amount
+                  type: DOUBLE
+              - column:
+                  constraints:
+                    nullable: false
+                  name: expense_date
+                  type: DATE
+              - column:
+                  name: category_id
+                  type: BIGINT
+            tableName: expenses
+

@@ -2,6 +2,7 @@ package org.sadmansakib.expensemanagement.category.domain;
 
 import lombok.Builder;
 import org.jmolecules.ddd.types.AggregateRoot;
+import org.jmolecules.ddd.types.ValueObject;
 import org.sadmansakib.expensemanagement.shared.entity.domain.Amount;
 import org.sadmansakib.expensemanagement.shared.entity.domain.Id;
 
@@ -40,13 +41,13 @@ public record Category(Id id,
                 .build();
     }
 
-    public record CategoryName(String name) {
+    public record CategoryName(String name) implements ValueObject {
         public String get() {
             return name;
         }
     }
 
-    public record CategoryDescription(String description) {
+    public record CategoryDescription(String description) implements ValueObject {
         public String get() {
             return description;
         }

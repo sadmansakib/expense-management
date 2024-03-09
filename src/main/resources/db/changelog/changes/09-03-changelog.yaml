@@ -1,0 +1,29 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1709976997240-2
+      author: sadmansakib
+      changes:
+        - createTable:
+            tableName: event_publication
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: completion_date
+                  type: datetime
+              - column:
+                  name: event_type
+                  type: varchar(255)
+              - column:
+                  name: listener_id
+                  type: varchar(255)
+              - column:
+                  name: publication_date
+                  type: datetime
+              - column:
+                  name: serialized_event
+                  type: varchar

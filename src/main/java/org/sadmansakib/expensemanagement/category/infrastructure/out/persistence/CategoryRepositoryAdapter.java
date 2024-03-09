@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
+import java.util.Optional;
 
 @Service
 @SecondaryAdapter
@@ -41,5 +42,11 @@ public class CategoryRepositoryAdapter implements CategoryRepository {
                 .stream()
                 .map(CategoryEntity::toDomain)
                 .toList();
+    }
+
+    @Override
+    public Optional<Category> findById(Long id) {
+        return categories.findById(id)
+                .map(CategoryEntity::toDomain);
     }
 }
