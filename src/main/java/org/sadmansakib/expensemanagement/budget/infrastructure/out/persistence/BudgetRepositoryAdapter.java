@@ -9,6 +9,7 @@ import org.sadmansakib.expensemanagement.shared.entity.domain.Id;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collection;
 import java.util.Optional;
 
 @SecondaryAdapter
@@ -36,5 +37,13 @@ public class BudgetRepositoryAdapter implements BudgetRepository {
     public Optional<Budget> findById(Id id) {
         return budgets.findById(id.get())
                 .map(BudgetEntity::toDomain);
+    }
+
+    @Override
+    public Collection<Budget> findAll() {
+        return budgets.findAll()
+                .stream()
+                .map(BudgetEntity::toDomain)
+                .toList();
     }
 }

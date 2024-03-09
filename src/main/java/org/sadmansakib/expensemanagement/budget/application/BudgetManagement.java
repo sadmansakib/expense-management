@@ -5,6 +5,7 @@ import org.jmolecules.architecture.hexagonal.Port;
 import org.sadmansakib.expensemanagement.budget.domain.Budget;
 import org.sadmansakib.expensemanagement.budget.domain.BudgetCreator;
 import org.sadmansakib.expensemanagement.budget.domain.BudgetRepository;
+import org.sadmansakib.expensemanagement.budget.domain.Budgets;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -26,5 +27,9 @@ public class BudgetManagement {
         var createdBudget = creator.create(budgetToCreate);
         log.info("BudgetManagement|create:: createdBudget: {}", createdBudget);
         return createdBudget;
+    }
+
+    public Budgets history() {
+        return new Budgets(budgets.findAll());
     }
 }

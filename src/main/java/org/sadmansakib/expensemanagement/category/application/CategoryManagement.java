@@ -1,6 +1,5 @@
 package org.sadmansakib.expensemanagement.category.application;
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.jmolecules.architecture.hexagonal.PrimaryPort;
 import org.jmolecules.ddd.annotation.Service;

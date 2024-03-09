@@ -27,4 +27,10 @@ public class BudgetResource {
                 URI.create("/api/v1/budgets/" + createdBudget.id().get())
         ).body(RestResponse.created(RestBudget.from(createdBudget), "Budget created successfully"));
     }
+
+    @GetMapping
+    public ResponseEntity<RestResponse<RestBudgets>> history() {
+        var budgets = budgetManagement.history();
+        return ResponseEntity.ok(RestResponse.ok(RestBudgets.from(budgets)));
+    }
 }
