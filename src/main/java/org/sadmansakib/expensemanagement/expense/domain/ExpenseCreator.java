@@ -5,7 +5,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.jmolecules.architecture.hexagonal.SecondaryPort;
 import org.sadmansakib.expensemanagement.category.domain.CategoryService;
-import org.sadmansakib.expensemanagement.category.domain.ExpenseAddedInCategoryEvent;
 import org.sadmansakib.expensemanagement.shared.entity.domain.Amount;
 import org.sadmansakib.expensemanagement.shared.entity.domain.Id;
 
@@ -24,7 +23,7 @@ public class ExpenseCreator {
                 .then(expense -> {
                     var result = expense.added();
                     log.info("ExpenseCreator|create:: event fired for adding expense: {}", result);
-                    publisher.expenseAdded(new ExpenseAddedInCategoryEvent(expense.getCategoryId(), result.getAmount()));
+                    publisher.expenseAdded(result.getCategoryId(), result.getAmount());
                     return result;
                 });
     }
