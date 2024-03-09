@@ -33,6 +33,7 @@ public class CategoryManagement {
     }
 
     public Categories findAllByBudgetId(Long budgetId) {
+        log.info("CategoryManagement|findAllByBudgetId:: fetching categories with budgetId: {}", budgetId);
         return new Categories(categories.findAllByBudgetId(budgetId));
     }
 }
