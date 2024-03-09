@@ -9,6 +9,8 @@ spring:
     url: jdbc:postgresql://localhost:5432/expense_management
     username: postgres
     password: postgres
+  jpa:
+    show-sql: true
 
 logging:
   level:
