@@ -5,7 +5,7 @@ import org.jmolecules.architecture.hexagonal.PrimaryPort;
 import org.jmolecules.ddd.annotation.Service;
 import org.sadmansakib.expensemanagement.budget.domain.BudgetService;
 import org.sadmansakib.expensemanagement.category.domain.*;
-import org.sadmansakib.expensemanagement.category.domain.ExpenseAddedInCategoryEvent;
+import org.sadmansakib.expensemanagement.category.domain.CategoryExpenseAdded;
 import org.springframework.modulith.events.ApplicationModuleListener;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
@@ -39,7 +39,7 @@ public class CategoryManagement {
 
     @ApplicationModuleListener
     @Async
-    void handleExpenseAdded(ExpenseAddedInCategoryEvent event) {
+    void handleExpenseAdded(CategoryExpenseAdded event) {
         log.info("CategoryManagement|handleExpenseAdded:: received event: {}", event);
         categories.findById(event.categoryId().id())
                 .ifPresentOrElse(category -> {

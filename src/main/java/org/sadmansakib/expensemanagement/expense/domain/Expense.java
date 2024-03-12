@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.ToString;
 import org.jmolecules.ddd.types.AggregateRoot;
 import org.jmolecules.ddd.types.ValueObject;
-import org.sadmansakib.expensemanagement.category.domain.ExpenseAddedInCategoryEvent;
+import org.sadmansakib.expensemanagement.category.domain.CategoryExpenseAdded;
 import org.sadmansakib.expensemanagement.shared.entity.domain.Amount;
 import org.sadmansakib.expensemanagement.shared.entity.domain.Id;
 import org.springframework.data.domain.AbstractAggregateRoot;
@@ -35,7 +35,7 @@ public class Expense extends AbstractAggregateRoot<Expense> implements Aggregate
     }
 
     Expense added() {
-        registerEvent(new ExpenseAddedInCategoryEvent(id, amount));
+        registerEvent(new CategoryExpenseAdded(id, amount));
         return this;
     }
 

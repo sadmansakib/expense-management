@@ -6,5 +6,5 @@ import org.sadmansakib.expensemanagement.shared.entity.domain.Amount;
 import org.sadmansakib.expensemanagement.shared.entity.domain.Id;
 
 @Externalized("expensemanagement.category")
-public record ExpenseAddedInCategoryEvent(Id categoryId, Amount spent) implements DomainEvent {
+public record CategoryExpenseAdded(Id categoryId, Amount spent) implements DomainEvent {
 }
