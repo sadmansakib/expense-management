@@ -11,6 +11,7 @@ import org.sadmansakib.expensemanagement.shared.entity.domain.Id;
 @SecondaryPort
 public class CategoryUpdater {
     private final CategoryRepository categories;
+    private final CategoryEventPublisher eventPublisher;
 
     public void addExpense(Id categoryId, Amount amount) {
         log.info("CategoryUpdater|addExpense:: Adding expense to category: {}", categoryId);
@@ -19,7 +20,9 @@ public class CategoryUpdater {
                     log.info("CategoryManagement|handleExpenseAdded:: found category: {}", category);
                     category = category.addSpent(amount);
                     log.info("CategoryManagement|handleExpenseAdded:: updated category: {}", category);
-                    categories.save(category);
+                    var updatedCategory = categories.save(category);
+                    log.info("CategoryManagement|handleExpenseAdded:: saved category: {}", updatedCategory);
+                    eventPublisher.updateBudgetSpent(updatedCategory.budgetId(), amount);
                 }, () -> {
                     log.error("CategoryManagement|handleExpenseAdded:: category not found for id: {}", categoryId.get());
                     throw new CategoryNotFoundException(categoryId.get());

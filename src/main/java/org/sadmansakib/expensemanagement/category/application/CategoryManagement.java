@@ -19,10 +19,11 @@ public class CategoryManagement {
     private final CategoryCreator creator;
     private final CategoryUpdater updater;
 
-    public CategoryManagement(CategoryRepository categories, BudgetService budgets) {
+    public CategoryManagement(CategoryRepository categories,
+                              BudgetService budgets, CategoryEventPublisher eventPublisher) {
         this.categories = categories;
         creator = new CategoryCreator(categories, budgets);
-        updater = new CategoryUpdater(categories);
+        updater = new CategoryUpdater(categories, eventPublisher);
     }
 
     public Category create(CategoryCreator.CategoryToCreate categoryToCreate) {

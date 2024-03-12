@@ -2,12 +2,11 @@ package org.sadmansakib.expensemanagement.budget.application;
 
 import lombok.extern.slf4j.Slf4j;
 import org.jmolecules.architecture.hexagonal.Port;
-import org.sadmansakib.expensemanagement.budget.domain.Budget;
-import org.sadmansakib.expensemanagement.budget.domain.BudgetCreator;
-import org.sadmansakib.expensemanagement.budget.domain.BudgetRepository;
-import org.sadmansakib.expensemanagement.budget.domain.Budgets;
+import org.jmolecules.ddd.annotation.Service;
+import org.sadmansakib.expensemanagement.budget.domain.*;
+import org.springframework.modulith.events.ApplicationModuleListener;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 @Port
 @Service
@@ -17,9 +16,12 @@ public class BudgetManagement {
     private final BudgetRepository budgets;
     private final BudgetCreator creator;
 
+    private final BudgetUpdater updater;
+
     public BudgetManagement(BudgetRepository budgets) {
         this.budgets = budgets;
         creator = new BudgetCreator(budgets);
+        updater = new BudgetUpdater(budgets);
     }
 
     public Budget create(BudgetCreator.BudgetToCreate budgetToCreate) {
@@ -31,5 +33,12 @@ public class BudgetManagement {
 
     public Budgets history() {
         return new Budgets(budgets.findAll());
+    }
+
+    @ApplicationModuleListener
+    @Async
+    public void on(BudgetSpent event){
+        log.info("BudgetManagement|on:: received event: {}", event);
+        updater.updateBudgetSpent(event.budgetId(), event.spentAmount());
     }
 }
