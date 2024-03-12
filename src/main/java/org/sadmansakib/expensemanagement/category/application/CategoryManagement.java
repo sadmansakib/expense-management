@@ -17,10 +17,12 @@ import org.springframework.stereotype.Component;
 public class CategoryManagement {
     private final CategoryRepository categories;
     private final CategoryCreator creator;
+    private final CategoryUpdater updater;
 
     public CategoryManagement(CategoryRepository categories, BudgetService budgets) {
         this.categories = categories;
         creator = new CategoryCreator(categories, budgets);
+        updater = new CategoryUpdater(categories);
     }
 
     public Category create(CategoryCreator.CategoryToCreate categoryToCreate) {
@@ -41,15 +43,6 @@ public class CategoryManagement {
     @Async
     void handleExpenseAdded(CategoryExpenseAdded event) {
         log.info("CategoryManagement|handleExpenseAdded:: received event: {}", event);
-        categories.findById(event.categoryId().id())
-                .ifPresentOrElse(category -> {
-                    log.info("CategoryManagement|handleExpenseAdded:: found category: {}", category);
-                    category = category.addSpent(event.spent());
-                    log.info("CategoryManagement|handleExpenseAdded:: updated category: {}", category);
-                    categories.save(category);
-                }, () -> {
-                    log.error("CategoryManagement|handleExpenseAdded:: category not found for id: {}", event.categoryId());
-                    throw new CategoryNotFoundException(event.categoryId().get());
-                });
+        updater.addExpense(event.categoryId(), event.spent());
     }
 }
