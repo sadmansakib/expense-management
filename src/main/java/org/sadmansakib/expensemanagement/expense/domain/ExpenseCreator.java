@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.jmolecules.architecture.hexagonal.SecondaryPort;
+import org.jmolecules.ddd.annotation.Service;
 import org.sadmansakib.expensemanagement.category.domain.CategoryService;
 import org.sadmansakib.expensemanagement.shared.entity.domain.Amount;
 import org.sadmansakib.expensemanagement.shared.entity.domain.Id;
@@ -11,6 +12,7 @@ import org.sadmansakib.expensemanagement.shared.entity.domain.Id;
 @SecondaryPort
 @Slf4j
 @RequiredArgsConstructor
+@Service
 public class ExpenseCreator {
     private final ExpenseRepository expenses;
     private final CategoryService categories;
