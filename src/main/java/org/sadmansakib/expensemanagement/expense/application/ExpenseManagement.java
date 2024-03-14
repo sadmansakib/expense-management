@@ -1,7 +1,7 @@
 package org.sadmansakib.expensemanagement.expense.application;
 
 import lombok.extern.slf4j.Slf4j;
-import org.jmolecules.architecture.hexagonal.PrimaryPort;
+import org.jmolecules.architecture.hexagonal.Port;
 import org.jmolecules.ddd.annotation.Service;
 import org.sadmansakib.expensemanagement.category.domain.CategoryService;
 import org.sadmansakib.expensemanagement.expense.domain.Expense;
@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Component
 @Slf4j
-@PrimaryPort
+@Port
 @Transactional
 public class ExpenseManagement {
     private final ExpenseCreator creator;

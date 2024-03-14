@@ -1,17 +1,16 @@
 package org.sadmansakib.expensemanagement.category.application;
 
 import lombok.extern.slf4j.Slf4j;
-import org.jmolecules.architecture.hexagonal.PrimaryPort;
+import org.jmolecules.architecture.hexagonal.Port;
 import org.jmolecules.ddd.annotation.Service;
 import org.sadmansakib.expensemanagement.budget.domain.BudgetService;
 import org.sadmansakib.expensemanagement.category.domain.*;
-import org.sadmansakib.expensemanagement.category.domain.CategoryExpenseAdded;
 import org.springframework.modulith.events.ApplicationModuleListener;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 @Service
-@PrimaryPort
+@Port
 @Slf4j
 @Component
 public class CategoryManagement {
