@@ -24,10 +24,10 @@ public class BudgetCreator {
         return budgets.save(budget);
     }
 
-    public record BudgetToCreate(Amount totalAllocatedAmount, Budget.Month month, Budget.Year year) {
+    public record BudgetToCreate(Amount allocated, Budget.Month month, Budget.Year year) {
         public Budget create() {
             return Budget.builder()
-                    .allocated(totalAllocatedAmount)
+                    .allocated(allocated)
                     .spent(Amount.zero())
                     .month(month)
                     .year(year)

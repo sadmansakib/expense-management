@@ -25,7 +25,7 @@ public class CategoryResource {
         log.info("CategoryResource|create:: categoryToCreate: {}", categoryToCreate);
         var category = categories.create(categoryToCreate.toDomain());
         log.info("CategoryResource|create:: created category: {}", category);
-        return ResponseEntity.created(URI.create("/api/v1/categories/" + category.id().get()))
+        return ResponseEntity.created(URI.create(STR."/api/v1/categories/\{category.id().get()}"))
                 .body(RestResponse.created(RestCategory.from(category), "Category created successfully"));
     }
 

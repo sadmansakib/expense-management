@@ -1,5 +1,6 @@
 package org.sadmansakib.expensemanagement.budget.infrastructure.in;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.jmolecules.architecture.hexagonal.PrimaryAdapter;
@@ -19,12 +20,12 @@ public class BudgetResource {
     private final BudgetManagement budgetManagement;
 
     @PostMapping
-    public ResponseEntity<RestResponse<RestBudget>> create(@RequestBody RestBudgetToCreate restBudgetToCreate) {
+    public ResponseEntity<RestResponse<RestBudget>> create(@RequestBody @Valid RestBudgetToCreate restBudgetToCreate) {
         log.info("BudgetResource|create:: restBudgetToCreate: {}", restBudgetToCreate);
         var createdBudget = budgetManagement.create(restBudgetToCreate.toDomain());
         log.info("BudgetResource|create:: createdBudget: {}", createdBudget);
         return ResponseEntity.created(
-                URI.create("/api/v1/budgets/" + createdBudget.id().get())
+                URI.create(STR."/api/v1/budgets/\{createdBudget.id().get()}")
         ).body(RestResponse.created(RestBudget.from(createdBudget), "Budget created successfully"));
     }
 

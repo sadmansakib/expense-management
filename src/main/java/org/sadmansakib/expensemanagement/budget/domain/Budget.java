@@ -1,16 +1,22 @@
 package org.sadmansakib.expensemanagement.budget.domain;
 
 
-import lombok.*;
+import lombok.Builder;
 import org.jmolecules.ddd.types.AggregateRoot;
-import org.jmolecules.ddd.types.Identifier;
 import org.jmolecules.ddd.types.ValueObject;
 import org.sadmansakib.expensemanagement.shared.entity.domain.Amount;
 import org.sadmansakib.expensemanagement.shared.entity.domain.Id;
+import org.sadmansakib.expensemanagement.shared.error.domain.Assert;
 
 @Builder
 public record Budget(Id id, Amount allocated, Amount spent, Month month,
                      Year year) implements AggregateRoot<Budget, Id> {
+
+    public Budget {
+        Assert.field("allocated", allocated.get())
+                .min(1.0);
+    }
+
     @Override
     public Id getId() {
         return id;
@@ -38,6 +44,10 @@ public record Budget(Id id, Amount allocated, Amount spent, Month month,
     }
 
     public record Month(String month) implements ValueObject {
+        public Month {
+            Assert.notNull("month", month);
+        }
+
         public String get() {
             return month;
         }

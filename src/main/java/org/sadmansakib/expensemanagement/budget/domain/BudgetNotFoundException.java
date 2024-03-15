@@ -1,9 +1,10 @@
 package org.sadmansakib.expensemanagement.budget.domain;
 
 import org.sadmansakib.expensemanagement.shared.entity.domain.Id;
+import org.sadmansakib.expensemanagement.shared.error.domain.ExpenseManagementException;
 
-public class BudgetNotFoundException extends RuntimeException {
+public class BudgetNotFoundException extends ExpenseManagementException {
     public BudgetNotFoundException(Id id) {
-        super("Budget not found for id: " + id.get());
+        super(STR."Budget not found for id: \{id.get()}", 404);
     }
 }

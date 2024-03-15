@@ -27,13 +27,13 @@ public class CategoryCreator {
     @Builder
     public record CategoryToCreate(Category.CategoryName name,
                                    Category.CategoryDescription description,
-                                   Amount totalAllocatedAmount,
+                                   Amount allocated,
                                    Id budgetId) {
         public Category create(Id budgetId) {
             return Category.builder()
                     .name(name)
                     .description(description)
-                    .allocated(totalAllocatedAmount)
+                    .allocated(allocated)
                     .spent(Amount.zero())
                     .budgetId(budgetId)
                     .build();

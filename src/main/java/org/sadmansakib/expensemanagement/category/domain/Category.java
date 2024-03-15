@@ -5,6 +5,7 @@ import org.jmolecules.ddd.types.AggregateRoot;
 import org.jmolecules.ddd.types.ValueObject;
 import org.sadmansakib.expensemanagement.shared.entity.domain.Amount;
 import org.sadmansakib.expensemanagement.shared.entity.domain.Id;
+import org.sadmansakib.expensemanagement.shared.error.domain.Assert;
 
 @Builder
 public record Category(Id id,
@@ -12,6 +13,14 @@ public record Category(Id id,
                        CategoryDescription description,
                        Amount allocated,
                        Amount spent, Id budgetId) implements AggregateRoot<Category, Id> {
+
+    public Category {
+        Assert.notNull("name", name);
+        Assert.notNull("description", description);
+        Assert.field("allocated", allocated.get())
+                .min(1.0);
+        Assert.notNull("budgetId", budgetId);
+    }
 
     @Override
     public Id getId() {
@@ -29,14 +38,14 @@ public record Category(Id id,
                 .build();
     }
 
-    public static Category toCategory(Long id, String name, String description, Double totalAllocatedAmount,
-                                      Double totalSpentAmount, Long budgetId) {
+    public static Category toCategory(Long id, String name, String description, Double allocated,
+                                      Double spent, Long budgetId) {
         return Category.builder()
                 .description(new CategoryDescription(description))
                 .id(new Id(id))
                 .name(new CategoryName(name))
-                .allocated(new Amount(totalAllocatedAmount))
-                .spent(new Amount(totalSpentAmount))
+                .allocated(new Amount(allocated))
+                .spent(new Amount(spent))
                 .budgetId(new Id(budgetId))
                 .build();
     }

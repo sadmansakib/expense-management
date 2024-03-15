@@ -1,12 +1,12 @@
 package org.sadmansakib.expensemanagement.budget.domain;
 
+import org.sadmansakib.expensemanagement.shared.error.domain.Assert;
+
 import java.util.Collection;
 
 public record Budgets(Collection<Budget> budgets) {
     public Budgets {
-        if (budgets == null) {
-            throw new IllegalArgumentException("Budgets cannot be null");
-        }
+        Assert.notNull("budgets", budgets);
     }
 
     public Collection<Budget> get(){
