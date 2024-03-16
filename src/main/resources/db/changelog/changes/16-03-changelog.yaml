@@ -1,0 +1,80 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1710608601658-1
+      author: sadmansakib
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_unit_types
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: created_date
+                  type: DATETIME
+              - column:
+                  name: last_modified_date
+                  type: DATETIME
+              - column:
+                  constraints:
+                    nullable: false
+                  name: name
+                  type: VARCHAR(100)
+            tableName: unit_types
+  - changeSet:
+      id: 1710608601658-2
+      author: sadmansakib
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addUniqueConstraint:
+            columnNames: name
+            constraintName: uc_unit_types_name
+            tableName: unit_types
+  - changeSet:
+      id: 1710608601658-3
+      author: sadmansakib
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - insert:
+            tableName: unit_types
+            columns:
+              - column:
+                  name: name
+                  value: 'KG'
+        - insert:
+            tableName: unit_types
+            columns:
+              - column:
+                  name: name
+                  value: 'LITER'
+        - insert:
+            tableName: unit_types
+            columns:
+              - column:
+                  name: name
+                  value: 'PIECE'
+        - insert:
+            tableName: unit_types
+            columns:
+              - column:
+                  name: name
+                  value: 'PACKET'
+        - insert:
+            tableName: unit_types
+            columns:
+              - column:
+                  name: name
+                  value: 'BOX'
+        - insert:
+            tableName: unit_types
+            columns:
+              - column:
+                  name: name
+                  value: 'GRAM'
+
+
