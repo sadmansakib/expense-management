@@ -4,6 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 import org.sadmansakib.expensemanagement.grocery.domain.GroceryList;
 import org.sadmansakib.expensemanagement.grocery.domain.GroceryListCreator;
 import org.sadmansakib.expensemanagement.shared.entity.domain.Amount;
+import org.sadmansakib.expensemanagement.shared.entity.domain.Name;
 
 import java.time.LocalDate;
 
@@ -25,7 +26,7 @@ public record RestGroceryListToCreate(
 
     public GroceryListCreator.GroceryListToCreate toDomain() {
         return GroceryListCreator.GroceryListToCreate.builder()
-                .name(new GroceryList.Name(name))
+                .name(new Name(name))
                 .type(GroceryList.Type.valueOf(type.toUpperCase()))
                 .estimated(new Amount(estimated))
                 .shoppingDate(new GroceryList.Date(LocalDate.parse(shoppingDate)))

@@ -10,6 +10,7 @@ import org.hibernate.type.SqlTypes;
 import org.sadmansakib.expensemanagement.grocery.domain.GroceryList;
 import org.sadmansakib.expensemanagement.shared.entity.domain.Amount;
 import org.sadmansakib.expensemanagement.shared.entity.domain.Id;
+import org.sadmansakib.expensemanagement.shared.entity.domain.Name;
 import org.sadmansakib.expensemanagement.shared.persistence.domain.BaseEntity;
 
 import java.time.LocalDate;
@@ -59,7 +60,7 @@ public class GroceryListEntity extends BaseEntity {
     GroceryList toDomain() {
         return GroceryList.builder()
                 .id(new Id(getId()))
-                .name(new GroceryList.Name(getName()))
+                .name(new Name(getName()))
                 .type(GroceryList.Type.valueOf(getType()))
                 .paid(new Amount(getTotalPaid()))
                 .estimated(new Amount(getEstimatedCost()))

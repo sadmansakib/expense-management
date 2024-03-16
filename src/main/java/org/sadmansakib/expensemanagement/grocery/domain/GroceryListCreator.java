@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.jmolecules.ddd.annotation.Service;
 import org.sadmansakib.expensemanagement.shared.entity.domain.Amount;
+import org.sadmansakib.expensemanagement.shared.entity.domain.Name;
 
 import java.util.Objects;
 
@@ -24,7 +25,7 @@ public class GroceryListCreator {
     }
 
     @Builder
-    public record GroceryListToCreate(GroceryList.Name name, GroceryList.Type type,
+    public record GroceryListToCreate(Name name, GroceryList.Type type,
                                       Amount paid, Amount estimated, GroceryList.Date shoppingDate) {
         public GroceryList create() {
             var listBuilder = GroceryList.builder()

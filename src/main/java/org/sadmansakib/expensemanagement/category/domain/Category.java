@@ -5,11 +5,12 @@ import org.jmolecules.ddd.types.AggregateRoot;
 import org.jmolecules.ddd.types.ValueObject;
 import org.sadmansakib.expensemanagement.shared.entity.domain.Amount;
 import org.sadmansakib.expensemanagement.shared.entity.domain.Id;
+import org.sadmansakib.expensemanagement.shared.entity.domain.Name;
 import org.sadmansakib.expensemanagement.shared.error.domain.Assert;
 
 @Builder
 public record Category(Id id,
-                       CategoryName name,
+                       Name name,
                        CategoryDescription description,
                        Amount allocated,
                        Amount spent, Id budgetId) implements AggregateRoot<Category, Id> {
@@ -43,17 +44,11 @@ public record Category(Id id,
         return Category.builder()
                 .description(new CategoryDescription(description))
                 .id(new Id(id))
-                .name(new CategoryName(name))
+                .name(new Name(name))
                 .allocated(new Amount(allocated))
                 .spent(new Amount(spent))
                 .budgetId(new Id(budgetId))
                 .build();
-    }
-
-    public record CategoryName(String name) implements ValueObject {
-        public String get() {
-            return name;
-        }
     }
 
     public record CategoryDescription(String description) implements ValueObject {

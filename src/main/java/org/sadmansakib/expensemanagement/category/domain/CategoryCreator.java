@@ -7,6 +7,7 @@ import org.jmolecules.architecture.hexagonal.SecondaryPort;
 import org.sadmansakib.expensemanagement.budget.domain.BudgetService;
 import org.sadmansakib.expensemanagement.shared.entity.domain.Amount;
 import org.sadmansakib.expensemanagement.shared.entity.domain.Id;
+import org.sadmansakib.expensemanagement.shared.entity.domain.Name;
 
 @SecondaryPort
 @RequiredArgsConstructor
@@ -25,7 +26,7 @@ public class CategoryCreator {
     }
 
     @Builder
-    public record CategoryToCreate(Category.CategoryName name,
+    public record CategoryToCreate(Name name,
                                    Category.CategoryDescription description,
                                    Amount allocated,
                                    Id budgetId) {
