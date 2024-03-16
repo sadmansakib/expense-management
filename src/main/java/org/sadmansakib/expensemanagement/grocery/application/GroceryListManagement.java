@@ -5,6 +5,7 @@ import org.jmolecules.ddd.annotation.Service;
 import org.sadmansakib.expensemanagement.grocery.domain.GroceryList;
 import org.sadmansakib.expensemanagement.grocery.domain.GroceryListCreator;
 import org.sadmansakib.expensemanagement.grocery.domain.GroceryListRepository;
+import org.sadmansakib.expensemanagement.grocery.domain.GroceryLists;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -24,5 +25,10 @@ public class GroceryListManagement {
         var domain = creator.create(groceryListToCreate);
         log.info("GroceryListManagement|create:: created domain: {}", domain);
         return domain;
+    }
+
+    public GroceryLists history() {
+        log.info("GroceryListManagement|history:: fetching all grocery lists");
+        return new GroceryLists(groceries.history());
     }
 }

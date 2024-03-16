@@ -8,6 +8,8 @@ import org.sadmansakib.expensemanagement.grocery.domain.GroceryListRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collection;
+
 @Component
 @SecondaryAdapter
 @Slf4j
@@ -25,5 +27,13 @@ public class GroceryListRepositoryAdapter implements GroceryListRepository {
         entity = groceries.save(entity);
         log.info("GroceryListRepositoryAdapter|save:: saved entity: {}", entity);
         return entity.toDomain();
+    }
+
+    @Override
+    public Collection<GroceryList> history() {
+        log.info("GroceryListRepositoryAdapter|history:: fetching all grocery lists");
+        return groceries.findAll()
+                .stream()
+                .map(GroceryListEntity::toDomain).toList();
     }
 }
