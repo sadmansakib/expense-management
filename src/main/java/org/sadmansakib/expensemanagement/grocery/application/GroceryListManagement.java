@@ -1,6 +1,7 @@
 package org.sadmansakib.expensemanagement.grocery.application;
 
 import lombok.extern.slf4j.Slf4j;
+import org.jmolecules.architecture.hexagonal.Port;
 import org.jmolecules.ddd.annotation.Service;
 import org.sadmansakib.expensemanagement.grocery.domain.GroceryList;
 import org.sadmansakib.expensemanagement.grocery.domain.GroceryListCreator;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Service
 @Slf4j
+@Port
 public class GroceryListManagement {
     private final GroceryListRepository groceries;
     private final GroceryListCreator creator;

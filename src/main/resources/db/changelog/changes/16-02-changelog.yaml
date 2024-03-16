@@ -1,0 +1,40 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1710606045511-1
+      author: sadmansakib
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_grocery_items
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: created_date
+                  type: DATETIME
+              - column:
+                  name: last_modified_date
+                  type: DATETIME
+              - column:
+                  constraints:
+                    nullable: false
+                  name: name
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: quantity
+                  type: DOUBLE
+              - column:
+                  name: estimated_cost
+                  type: DOUBLE
+              - column:
+                  name: system_estimated_cost
+                  type: DOUBLE
+            tableName: grocery_items
+
