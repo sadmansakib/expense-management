@@ -46,35 +46,53 @@ databaseChangeLog:
               - column:
                   name: name
                   value: 'KG'
+              - column:
+                  name: created_date
+                  value: 'NOW()'
         - insert:
             tableName: unit_types
             columns:
               - column:
                   name: name
                   value: 'LITER'
+              - column:
+                  name: created_date
+                  value: 'NOW()'
         - insert:
             tableName: unit_types
             columns:
               - column:
                   name: name
                   value: 'PIECE'
+              - column:
+                  name: created_date
+                  value: 'NOW()'
         - insert:
             tableName: unit_types
             columns:
               - column:
                   name: name
                   value: 'PACKET'
+              - column:
+                  name: created_date
+                  value: 'NOW()'
         - insert:
             tableName: unit_types
             columns:
               - column:
                   name: name
                   value: 'BOX'
+              - column:
+                  name: created_date
+                  value: 'NOW()'
         - insert:
             tableName: unit_types
             columns:
               - column:
                   name: name
                   value: 'GRAM'
+              - column:
+                  name: created_date
+                  value: 'NOW()'
 
 
